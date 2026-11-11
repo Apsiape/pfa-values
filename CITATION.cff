@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: Please cite the paper; this repository supplies its source.
 type: software
 title: "The values of rational probabilistic finite automata are the left-c.e. reals"
-version: 1.0.1
+version: 1.0.2
 doi: "10.5281/zenodo.24142961"
 date-released: '2026-11-11'
 license: [CC-BY-4.0, MIT, Apache-2.0]
