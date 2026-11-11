@@ -10,6 +10,7 @@
 \usepackage{enumitem}
 \usepackage{tikz}
 \usetikzlibrary{calc,arrows.meta,positioning}
+\usepackage{aliascnt}
 \usepackage[colorlinks=true,linkcolor=black!70!blue,citecolor=black!60!blue,urlcolor=black!60!blue]{hyperref}
 \usepackage[capitalise,noabbrev]{cleveref}
 \usepackage{caption}
@@ -18,19 +19,20 @@
 \linespread{1.04}
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
+% Each environment shares the theorem counter through an alias, so that cleveref names it by its own type.
+\newcommand{\sharedthm}[2]{\newaliascnt{#1}{theorem}\newtheorem{#1}[#1]{#2}\aliascntresetthe{#1}\crefname{#1}{#2}{#2s}}
+\sharedthm{proposition}{Proposition}
+\sharedthm{lemma}{Lemma}
+\sharedthm{corollary}{Corollary}
 \theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{question}[theorem]{Question}
+\sharedthm{definition}{Definition}
+\sharedthm{question}{Question}
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
+\sharedthm{remark}{Remark}
 \newtheorem*{mainA}{Theorem A}
 \newtheorem*{mainB}{Theorem B}
 \newtheorem*{mainC}{Theorem C}
 \newtheorem*{mainD}{Corollary D}
-\crefname{question}{Question}{Questions}
 \newcommand{\N}{\mathbb N}
 \newcommand{\Q}{\mathbb Q}
 \newcommand{\ind}{\mathbf 1}

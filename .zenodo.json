@@ -2,7 +2,7 @@
   "title": "The values of rational probabilistic finite automata are the left-c.e. reals",
   "upload_type": "publication",
   "publication_type": "preprint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publication_date": "2026-11-11",
   "creators": [
     {
@@ -27,7 +27,7 @@
   "access_right": "open",
   "license": "cc-by-4.0",
   "language": "eng",
-  "notes": "Preprint. It has not been peer reviewed. Version 1.0.0. Text: CC BY 4.0. Build script: MIT or Apache 2.0.",
+  "notes": "Preprint. It has not been peer reviewed. Version 1.0.1. Version 1.0.1 corrects the names of cross-references in the PDF (version 1.0.0 printed every reference to a lemma, corollary, proposition, definition, question or remark as \"Theorem\"), a garbled name in paper/abstract.txt, and the page count in paper/README.txt. The mathematics is unchanged. Text: CC BY 4.0. Build script: MIT or Apache 2.0.",
   "related_identifiers": [
     {
       "identifier": "https://finite.works/papers/pfa-values/",

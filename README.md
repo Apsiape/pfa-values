@@ -1,6 +1,6 @@
 # The values of rational probabilistic finite automata are the left-c.e. reals
 
-Seth Douglas and Nidhal Mghirbi. Version 1.0.0, November 2026. DOI: [10.5281/zenodo.24142962](https://doi.org/10.5281/zenodo.24142962) (all versions: [10.5281/zenodo.24142961](https://doi.org/10.5281/zenodo.24142961)).
+Seth Douglas and Nidhal Mghirbi. Version 1.0.1, November 2026. DOI for all versions: [10.5281/zenodo.24142961](https://doi.org/10.5281/zenodo.24142961); version 1.0.0: [10.5281/zenodo.24142962](https://doi.org/10.5281/zenodo.24142962).
 
 **This is a preprint. It has not been peer reviewed.**
 
@@ -28,6 +28,10 @@ Section 8 shows that the realization cannot be computed from a left-c.e. index a
 - `SHA256SUMS`: SHA-256 hashes of every shipped file except this manifest. Check with `sha256sum -c SHA256SUMS` from the repository root.
 
 No computation is used in any proof.
+
+## Changes in 1.0.1
+
+Version 1.0.1 corrects the names of cross-references in the PDF (version 1.0.0 printed every reference to a lemma, corollary, proposition, definition, question or remark as "Theorem"), a garbled name in paper/abstract.txt, and the page count in paper/README.txt. The mathematics is unchanged.
 
 ## Citation and rights
 
