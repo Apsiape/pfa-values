@@ -1,6 +1,6 @@
 # The values of rational probabilistic finite automata are the left-c.e. reals
 
-Seth Douglas and Nidhal Mghirbi. Version 1.1.0, November 2026. DOI for all versions: [10.5281/zenodo.24142961](https://doi.org/10.5281/zenodo.24142961); version 1.0.2: [10.5281/zenodo.24147354](https://doi.org/10.5281/zenodo.24147354); version 1.0.1: [10.5281/zenodo.24143692](https://doi.org/10.5281/zenodo.24143692); version 1.0.0: [10.5281/zenodo.24142962](https://doi.org/10.5281/zenodo.24142962).
+Seth Douglas and Nidhal Mghirbi. Version 1.1.0, November 2026. DOI for all versions: [10.5281/zenodo.24142961](https://doi.org/10.5281/zenodo.24142961); version 1.1.0: [10.5281/zenodo.24151741](https://doi.org/10.5281/zenodo.24151741); version 1.0.2: [10.5281/zenodo.24147354](https://doi.org/10.5281/zenodo.24147354); version 1.0.1: [10.5281/zenodo.24143692](https://doi.org/10.5281/zenodo.24143692); version 1.0.0: [10.5281/zenodo.24142962](https://doi.org/10.5281/zenodo.24142962).
 
 **This is a preprint. It has not been peer reviewed.**
 
