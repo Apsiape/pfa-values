@@ -67,14 +67,12 @@
 \hypersetup{pdftitle={The values of rational probabilistic finite automata are the left-c.e. reals},pdfauthor={Seth Douglas and Nidhal Mghirbi}}
 \title{\vspace{-1.2cm}\LARGE The values of rational probabilistic finite automata\\ are the left-c.e.\ reals}
 \author{Seth Douglas \and Nidhal Mghirbi}
-\date{\small Version 1.0.2, November 2026}
+\date{\small Version 1.1.0, November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
 \noindent
-Which real numbers are values of probabilistic finite automata with rational transition probabilities and a rational initial distribution? We show that they are exactly the left-c.e.\ reals in $[0,1]$, the limits of computable nondecreasing sequences of rational numbers. Here the value of an automaton is the supremum, over all finite input words, of the probability that the word is accepted. Every value is left-c.e.\ because the words can be enumerated; we prove that every left-c.e.\ real in $[0,1]$ occurs, and that two input letters and one fixed number of states suffice for all of them.
-
-In particular a single automaton can have a noncomputable value. It was known that no algorithm computes, or even approximates, the value from the automaton; that concerns the map from automata to values, not single values. We give an automaton, specified explicitly relative to a fixed enumeration of Turing machines, whose value is $1/4$ plus the sum of $4^{-(n+2)}$ over the programs $n$ that halt on input $n$. The automaton checks claimed runs of a counter machine by a likelihood test in the manner of Condon and Lipton, and pays out a reward read from each run's output. The construction uses a rational interval around the target; from the target's approximations alone no algorithm can produce the automaton, since an automaton of value $0$ can be recognized. The halting probability of every prefix-free machine, Chaitin's $\Omega$ among them, is the value of a probabilistic finite automaton with two input letters. With a construction of Elkouss and P\'erez-Garc\'ia, every left-c.e.\ real in $[0,1]$ is also the capacity of a finite-state channel with rational transition probabilities; in particular one such channel has a noncomputable capacity.
+Which real numbers are values of probabilistic finite automata with rational transition probabilities and rational initial distributions? We prove that they are exactly the left-c.e.\ reals in $[0,1]$, the limits of computable nondecreasing rational sequences, and that two input letters and one fixed number of states suffice. The value is the supremum of acceptance probabilities over finite words. It was known that the value cannot be computed or approximated from the automaton; here a single automaton has a noncomputable value, given explicitly relative to a fixed enumeration of Turing machines. The construction checks counter-machine histories by a likelihood test in the manner of Condon and Lipton and pays a reward read from the output. It is effective given a rational interval around the target, but cannot be made effective from its approximations alone. Every prefix-free halting probability, including Chaitin's $\Omega$, is a value. A construction of Elkouss and P\'erez-Garc\'ia also realizes every left-c.e.\ real in $[0,1]$ as a rational finite-state channel capacity. For quantum automata with algebraic data, measure-once values are algebraic, while rational quantum channels and QFAs with control language realize all left-c.e.\ reals in $[0,1]$; computability for one-way Kondacs--Watrous measure-many automata remains open.
 \end{abstract}
 \begin{center}\small AI systems assisted with this work; see ``How this work was done.''\end{center}
 {\small\tableofcontents}
@@ -113,6 +111,7 @@ The construction is effective once a rational interval $a<\alpha<b$ around the t
 
 Theorem~A has the shape of the theorem of Hochman and Meyerovitch that the topological entropies of shifts of finite type on $\mathbb Z^d$, $d\ge2$, are exactly the nonnegative right-c.e.\ reals \cite{HM10}. In both cases a quantity attached to a finite description has an evident one-sided approximation, from above for entropy and from below for the value of an automaton, and every real with such an approximation occurs. We use this only as an analogy; the methods are different.
 
+For quantum automata the corresponding ladder has algebraic values at the measure-once end (for algebraic data) and all left-c.e.\ values for rational quantum channels and quantum automata with control language, while value computability for one-way Kondacs--Watrous measure-many automata remains open (\cref{sec:quantum}).
 \subsection{How the automaton works}
 
 Fix a left-c.e.\ real $\alpha\in(0,1)$ and rationals $0<a<\alpha<b<1$. For a binary word $s=s_1\cdots s_k$ let $x(s)=\sum_{i=1}^k s_i2^{i-k-1}$, the binary fraction $0.s_ks_{k-1}\cdots s_1$, and let $q(s)=a+(b-a)x(s)$. The set $W_\alpha$ of words $s$ with $q(s)<\alpha$ is computably enumerable, so some counter program outputs exactly the words of $W_\alpha$ along its halting runs (\cref{sec:counter}). The input of the automaton is meant to be a sequence of \emph{certificates}, each listing a run of this program: its instructions in order, and the counter values in unary (\cref{fig:mechanism}). A deterministic part of the automaton checks everything except the counter arithmetic. The arithmetic, which a finite automaton cannot check, is tested at random. At the start of each certificate the automaton picks one of two tests with equal probability. The \emph{joint} test survives each unary symbol of both sides of every claimed equation with probability $1/B$; the \emph{split} test picks one side of each equation at random and survives each of its symbols with probability $1/B^2$. On a correct run the two tests survive with the same probability. If any equation is false, the split test is at least $\kappa_B=(B+B^{-1})/2$ times as likely to survive (\cref{lem:test,lem:dichotomy}). Independently, a two-state register holds $x(s)$, for the output $s$ of the claimed run, as the probability of one of its states. At the end of a certificate, a surviving joint test accepts with probability $q(s)$, a surviving split test rejects with probability $1-q(s)$, and all other probability starts afresh. Acceptance and rejection are permanent.
@@ -183,7 +182,7 @@ Every prefix-free halting probability is a value & every halting probability & C
 \label{tab:landscape}
 \end{table}
 
-\paragraph{Reading guide.} \Cref{sec:prelim} fixes definitions and proves the easy inclusion. \Cref{sec:counter} constructs counter programs that output a given computably enumerable set of words; it is Minsky's simulation of Turing machines with outputs added, and a reader who knows it can take \cref{lem:program,lem:universal} as given. \Cref{sec:check} builds the random check of one certificate, and \cref{sec:race} adds the payout and proves Theorem~A. \Cref{sec:example} proves Theorem~C and Corollary~D, the latter using Theorem~B, which \cref{sec:binary} proves; and \cref{sec:uniform} discusses uniformity. \Cref{sec:open} collects open problems, with two classes of automata whose values are computable and the corresponding statement for partially observable Markov decision processes.
+\paragraph{Reading guide.} \Cref{sec:prelim} fixes definitions and proves the easy inclusion. \Cref{sec:counter} constructs counter programs that output a given computably enumerable set of words; it is Minsky's simulation of Turing machines with outputs added, and a reader who knows it can take \cref{lem:program,lem:universal} as given. \Cref{sec:check} builds the random check of one certificate, and \cref{sec:race} adds the payout and proves Theorem~A. \Cref{sec:example} proves Theorem~C and Corollary~D, the latter using Theorem~B, which \cref{sec:binary} proves; and \cref{sec:uniform} discusses uniformity. \Cref{sec:quantum} compares quantum automata, and \cref{sec:open} collects further open problems, with two classes of automata whose values are computable and the corresponding statement for partially observable Markov decision processes.
 
 \section{Preliminaries}\label{sec:prelim}
 
@@ -538,6 +537,169 @@ The values $0$ and $1$ are realized by one-state automata over $\{0,1\}$. Let $\
 
 The map from automata to left-c.e.\ indices of their values is computable (\cref{prop:easy}). By (ii) and (iii), a left-c.e.\ index of the target does not suffice to compute an automaton, while an index together with a rational interval $(a,b)$ does. The obstruction in (ii) concerns the lower end; we do not know whether an index together with a rational $a\in(0,\alpha)$ alone suffices.
 
+\section{Quantum automata: where the ladder breaks}\label{sec:quantum}
+
+Through the folklore simulation of probabilistic automata by quantum automata, Theorem~A determines the set of values of quantum models that keep classical records of their measurements; measure-once automata with algebraic data, which evolve coherently until one final measurement, have algebraic values. Between them lies the one-way Kondacs--Watrous measure-many model, which measures after every letter but continues on a single outcome; for it the question is open. Throughout this section all finite data, including the initial state and measurement operators, are algebraic unless explicitly required to be rational. The value is the supremum of the acceptance probabilities of finite input words. A rational complex matrix means one whose real and imaginary parts are rational.
+
+\subsection{The two ends}
+
+\begin{proposition}[measure-once values; implicit in \cite{DJK05}]\label{prop:mo}
+Every measure-once quantum finite automaton with algebraic data has an algebraic value, uniformly computable from its data.
+\end{proposition}
+
+\begin{proof}
+Write its acceptance probability as $\psi^*U_w^*EU_w\psi$, where the letter matrices are unitary and $0\le E\le I$ is the final accepting effect; fixed endmarker operations can be absorbed into $\psi$ and $E$. The closure $G$ of the letter monoid is a compact group. Derksen, Jeandel and Koiran note \cite[Section~2.2]{DJK05}, by a theorem of Onishchik and Vinberg, that this compact closure is algebraic, and give an algorithm \cite[Section~3]{DJK05} computing polynomial equations that define it; they work with real orthogonal matrices. Complex unitaries are handled by realification. Hence
+\[
+ V=\max_{g\in G}\psi^*g^*Eg\psi
+\]
+is the endpoint of an effectively semialgebraic subset of the real line. Real quantifier elimination makes it algebraic and computes it. Algebraicity is thus immediate from \cite[Section~2.2]{DJK05}, whose decision procedure evaluates exactly such a first-order sentence; it sharpens the computability that follows from the strict-threshold decision theorem of \cite{BJKP05}. We claim no priority for it.
+\end{proof}
+
+Here a \emph{rational quantum channel} is a completely positive trace-preserving (CPTP) linear map whose superoperator matrix in the matrix-unit basis has rational complex entries. This condition is on the channel, and does not require a Kraus representation with rational entries.
+
+\begin{proposition}[channel values]\label{prop:cptp}
+The values of automata whose letters act by rational quantum channels, with a rational initial density matrix and a rational final accepting effect, are exactly the left-c.e.\ reals in $[0,1]$.
+\end{proposition}
+
+\begin{proof}
+On a finite word the final density matrix and its acceptance probability are computable (in fact rational), so enumeration proves the upper inclusion. For the converse, embed a row-stochastic matrix $M$ as
+\[
+ \Phi_M(\rho)=\sum_{i,j}M(i,j)\rho_{ii}\,|j\rangle\langle j|.
+\]
+This is a rational CPTP map: Kraus operators $\sqrt{M(i,j)}\,|j\rangle\langle i|$ witness complete positivity and trace preservation. Starting at $\operatorname{diag}(\pi)$ and using effect $\operatorname{diag}(\ind_F)$ gives exactly the PFA's word probabilities. Apply Theorem~A. This classical embedding is the folklore exact simulation recorded in \cite[Theorem~4.2]{AY15}.
+\end{proof}
+
+\subsection{Quantum automata with control language}
+
+Bertoni, Mereghetti and Palano introduced \emph{quantum finite automata with control language} (QFA-CL) \cite{BMP03,MP06}. After each letter and a right endmarker, the machine applies the corresponding unitary and measures a fixed observable. All outcomes continue; acceptance means that the complete outcome sequence belongs to a fixed regular language. The classical recognizer reads outcomes but does not change the quantum operations. We use the special case of complete rank-one basis measurement. This differs from the Kondacs--Watrous measure-many model, where acceptance and rejection halt and there is only one continuing measurement outcome.
+
+The exact PFA simulation by general quantum automata is folklore \cite[Theorem~4.2]{AY15}; that survey also lists QFA-CL among the equivalent general models. The following value statement is a corollary of that simulation and Theorem~A. We give a rational-unitary realization explicitly.
+
+\begin{corollary}[control-language values]\label{cor:qfacl}
+The values of QFA-CL with algebraic data are exactly the left-c.e.\ reals in $[0,1]$. Rational real unitaries, a basis initial state and complete basis measurements already suffice.
+\end{corollary}
+
+\begin{proof}
+For a fixed word there are finitely many outcome sequences, with computable algebraic probabilities. Summing the probabilities of those in the control language and enumerating words proves the upper inclusion.
+
+For the lower inclusion, first give a rational PFA a deterministic start without changing its value: add a fresh nonaccepting start state and an opening letter which initializes its former initial distribution; old letters from the new start, and the opening letter from old states, go to a nonaccepting absorbing sink. Only a word with exactly one opening letter, at its beginning, can accept.
+
+For a dyadic PFA choose a common transition denominator $D=4^m$. For each letter $a$ partition $\{0,\ldots,D-1\}$ in each state $q$ so that a deterministic update $\delta(q,a,j)$ selects $q'$ for exactly $DM_a(q,q')$ choices of $j$. Number the $k$ input letters $1,\ldots,k$. On $\mathbb C^{k+1}\otimes\mathbb C^D$ use
+\[
+ U_a=S^a\otimes W_D,
+\]
+where $S$ is cyclic shift and $W_D$ is the Walsh matrix with entries $\pm2^{-m}$. Start in $|0,0\rangle$, measure the basis after each step, and use identity at the endmarker. Each ordinary outcome $(g,j)$ supplies a fresh uniform $j$; the difference of successive clock coordinates $g$, modulo $k+1$, identifies the input letter. Difference zero identifies the endmarker. A finite control recognizer stores the previous clock coordinate and the simulated PFA state, updates by $\delta$, and tests the accepting set at the endmarker. It rejects any outcome after that test. Induction gives equality of every word probability, including the empty word. Every unitary used here is rational.
+
+For a general rational PFA with common denominator $D>1$, put $r=\lceil\log_2D\rceil$. Use a four-dimensional Walsh coin $W_4$ and a sufficiently large cyclic clock to distinguish the input types $a$, $c$, $d$ and the endmarker exactly as above. Encode a PFA word $a_1\cdots a_h$ by blocks
+\[
+ a_1c^{L_1}d\;a_2c^{L_2}d\;\cdots\;a_hc^{L_h}d.
+\]
+The recognizer retains $a_i$ and the current PFA state. Each $c$ supplies one fair bit from its uniform four-way outcome. Groups of $r$ bits give independent uniform integers $j<2^r$. A trial with $j\ge D$ is discarded; the first $j<D$ makes the update $\delta(q,a_i,j)$ and sets a success flag. Further coins in that block are ignored. The delimiter rejects unless the flag is set. Partial trials are discarded at the delimiter. An endmarker is allowed only between blocks; malformed inputs reject. This uses finitely many classical states and no quantum feed-forward.
+
+The success probability of a block is
+\[
+ s(L)=1-(1-D/2^r)^{\lfloor L/r\rfloor}.
+\]
+Conditional on success its update is exactly $M_a$, independently of the trial of first success. The acceptance probability of the displayed code is consequently
+\begin{equation}\label{eq:qfacl-code}
+ P_A(a_1\cdots a_h)\prod_{i=1}^h s(L_i).
+\end{equation}
+It is at most $V(A)$, and for each fixed word tends to its PFA acceptance probability as all $L_i\to\infty$. The empty code implements the empty word. If $D=1$, update deterministically on $a$ and set the success flag immediately. Thus values are preserved for every rational PFA, using only rational Walsh matrices and permutation clocks. Theorem~A completes the proof.
+\end{proof}
+
+\subsection{The open one-way middle rung}
+
+For one-way Kondacs--Watrous (KW) measure-many automata \cite{KW97}, a convenient normal form, obtained by restricting each letter unitary to the nonhalting space, consists of continuing contractions $T_a$ (the nonhalting block), accepting and rejecting effects $Q_a,R_a\ge0$ (the Gram matrices of the accepting and rejecting blocks) with
+\[
+ T_a^*T_a+Q_a+R_a=I,
+\]
+a unit initial live vector $\psi$, and a final accepting effect $0\le E\le I$. Write $T_w=T_{a_h}\cdots T_{a_1}$ and
+\[
+ A_w=\sum_{i=1}^h T_{a_1\cdots a_{i-1}}^*Q_{a_i}T_{a_1\cdots a_{i-1}},\qquad
+ f(w)=\psi^*(A_w+T_w^*ET_w)\psi.
+\]
+Here $T_\eps=I$ and $A_\eps=0$. In particular $0\le A_w\le I-T_w^*T_w$. A fixed left-endmarker merely adds an algebraic initial acceptance and leaves an algebraic live vector of norm at most one; the conclusions below extend by this affine normalization. Every $f(w)$ is algebraic and computable, so the value is left-c.e.
+
+\begin{question}\label{qu:kw}
+Is the value of every one-way KW measure-many automaton with algebraic data a computable real? Is there a uniform algorithm to approximate these values from the automata?
+\end{question}
+
+Neither assertion is settled here. Two verified subclasses illustrate where effective upper bounds can be obtained.
+
+\begin{proposition}[unitary or rank at most one]\label{prop:kw-rankone}
+If every ordinary continuing operator $T_a$ is globally unitary or has rank at most one, then the value is algebraic and uniformly computable.
+\end{proposition}
+
+\begin{proof}
+Let $G$ be the compact closure of the unitary-letter monoid; these letters have $Q_a=R_a=0$. For each nonzero rank-one letter choose an algebraic unit vector $v_a$ spanning its image, and put $v_0=\psi$. At the beginning of a unitary stretch the live vector is a scalar multiple of one of these finitely many vectors. The stretch acts as $g\in G$. For mode $b$ set
+\[
+ e_b(g)=(gv_b)^*Egv_b,\quad
+ q_{ba}(g)=(gv_b)^*Q_agv_b,\quad
+ s_{ba}(g)=\|T_agv_b\|^2.
+\]
+A nonzero rank-one letter earns $q_{ba}(g)$ and leaves mass $s_{ba}(g)$ in mode $a$; a rank-zero letter earns $q_{ba}(g)$ and leaves no live mass. Stopping after the stretch earns $e_b(g)$. These functions are algebraic polynomials in the real coordinates of $g$, with $q_{ba}+s_{ba}\le1$.
+
+Write $\mathcal B$ for the finite set of modes, including mode $0$. Let $\mathcal P\subseteq[0,1]^{\mathcal B}$ consist of the vectors $z$ satisfying, for all modes $b$ and all $g\in G$,
+\[
+ z_b\ge e_b(g),\qquad
+ z_b\ge q_{ba}(g)+s_{ba}(g)z_a
+\]
+for nonzero rank-one letters, and $z_b\ge q_{ba}(g)$ for rank-zero letters. The all-ones vector is feasible. Let $(\Theta z)_b$ be the maximum over $g\in G$ of $e_b(g)$, of $q_{ba}(g)+s_{ba}(g)z_a$ over nonzero rank-one letters $a$, and of $q_{ba}(g)$ over rank-zero letters $a$; thus $\mathcal P=\{z\in[0,1]^{\mathcal B}:z\ge\Theta z,\ z_b\ge\max_Ge_b\}$. Finite-horizon Bellman iteration from $\max_G e_b$ increases to a vector $F$. The Bellman map $\Theta$ is monotone and $1$-Lipschitz, so $F$ is a fixed point and is the componentwise least member of $\mathcal P$. Every finite sequence of closure choices is approximable by actual unitary stretches, by continuity; hence $V=F_0=\min_{z\in\mathcal P}z_0$. This argument uses neither eventual halting nor uniqueness of a fixed point.
+
+The effective algebraic description of $G$ is due to Derksen, Jeandel and Koiran \cite{DJK05}. Real quantifier elimination now describes $\mathcal P$ and its minimum coordinate. Thus that coordinate is algebraic and computable. With no unitary letters take $G=\{I\}$; with no nonunitary letters this is precisely the measure-once maximization of \cref{prop:mo}.
+\end{proof}
+
+We give the effective compactness argument needed for the second subclass, including its regular-language step.
+
+\begin{lemma}[regular unitary products]\label{lem:regular-unitary}
+Given algebraic unitary letters and a regular language $L$, the closure of their products over $L$ is effectively compact semialgebraic. If $L$ is nonempty, finite $\epsilon$-nets made of actual $L$-words can be computed for every rational $\epsilon>0$.
+\end{lemma}
+
+\begin{proof}
+In a strongly connected component of a finite recognizer choose a root and internal paths from the root to each state $q$ and back, with products $A_q,B_q$. Products are chronological, with later factors on the left. Let $H$ be the compact group generated by the root loops $B_qA_q$ and $B_{q'}U_aA_q$ for internal edges $q\xrightarrow{a}q'$. Since
+\[
+ A_{q'}^{-1}U_aA_q=(B_{q'}A_{q'})^{-1}(B_{q'}U_aA_q)\in H,
+\]
+corrected edges telescope. The closure of internal $p$-to-$q$ path products is exactly $A_qHA_p^{-1}$. The reverse inclusion uses actual paths going first from $p$ to the root, then around root loops, then to $q$, together with $B_pA_p\in H$. The closure of a unitary monoid is a group, so inverses in these expressions are legitimate limits of positive products.
+
+A path in the recognizer traverses each strongly connected component at most once. There are finitely many choices of traversed components, connecting edges and entry and exit states. Thus its accepted-product closure is a finite union of finite products of these compact cosets and fixed matrices. Each $H$ is effectively algebraic by \cite{DJK05}; quantifier elimination describes the products and unions. Emptiness of $L$ is decidable. If it is nonempty, enumerate actual $L$-words and test whether their open $\epsilon$-balls cover the compact closure, a semialgebraic condition. Density and compactness guarantee that this search terminates.
+\end{proof}
+
+\begin{proposition}[common upper block-triangular form]\label{prop:kw-block}
+Suppose the continuing operators admit a common orthogonal decomposition $\mathbb C^d=H_1\oplus\cdots\oplus H_r$ of the live space in which they are upper block triangular, and each diagonal letter block is either unitary or strictly contracting in operator norm. Then their value is uniformly computable. The decomposition may be supplied or found effectively; existence of such a decomposition is decidable. These conclusions also hold with a regular restriction on the input words and an end effect depending on the final state of a finite recognizer.
+\end{proposition}
+
+\begin{proof}
+A unitary diagonal block of a contraction forces all other blocks in its column to vanish: the diagonal image already has full norm. Applying the same argument to the adjoint also clears its row. For a subalphabet $S$, let $K_S$ be the direct sum of the blocks on which every $S$-letter is unitary. It reduces every $S$-letter; all $Q_a,R_a$ for $a\in S$ annihilate it.
+
+On $K_S^\perp$ there are $r'\le r$ remaining blocks, each strictly contracted by some $S$-letter. A word containing every $S$-letter has each diagonal block norm at most
+\[
+ \rho=\max_j\prod_{a\in S}\|T_{a,jj}\|<1.
+\]
+Choose an effective rational $0<\rho_1<1$ above $\rho$. A product of $m$ such complete words has at most $r'-1$ strict block-index changes along each monotone block path, so its norm on $K_S^\perp$ is bounded by
+\begin{equation}\label{eq:block-bound}
+ r'\sum_{j=0}^{\min(r'-1,m)}\binom mj(r')^j\rho_1^{m-j}.
+\end{equation}
+Off-diagonal factors have norm at most one. This explicit bound tends to zero and supplies an effective $N_S$ complete blocks giving norm at most $1/2$. If $K_S^\perp=0$, take $N_S=1$. Grouping blocks gives norm at most $2^{-k}$ after $kN_S$ complete blocks.
+
+For completeness we explain how this gives effective finite nets of actual word instruments $J_w=(T_w,A_w)$, in the metric $\max(\|\Delta T\|,\|\Delta A\|)$, preserving any prescribed finite-monoid image of $w$. Replacing one segment by a $\delta$-close instrument changes the whole instrument by at most $3\delta$, since all continuing operators and accumulated effects have norm at most one. Proceed by induction on $|S|$, starting with the empty word. Fix $\eta>0$, choose $k$ so that $2^{1-k}$ and $2^{-2k}$ are below $\eta/4$, and put $t=kN_S$. Use greedy minimal $S$-complete blocks.
+
+If a word has at least $t$ complete blocks, write it $ps$ where $p$ ends at the $t$-th block. By \cref{lem:regular-unitary}, replace $s$ by a representative $u$ in the same finite-monoid fiber, whose action on $K_S$ is within $\eta/4$ of that of $s$. Finitely many such representatives cover all fibers. Because $p$ contracts the complement,
+\[
+ \|T_{ps}-T_{pu}\|\le\max(\eta/4,2^{1-k}),\qquad
+ \|A_{ps}-A_{pu}\|\le2^{-2k}.
+\]
+The second estimate is $A_{ps}-A_{pu}=T_p^*(A_s-A_u)T_p$, using that both suffix effects vanish on $K_S$. A minimal complete block has form $va$ with $v$ over $S\setminus\{a\}$. Replace each of the $t$ such proper-subalphabet stretches in $p$ by its inductively computed net representative, in the same monoid fiber. If there are fewer than $t$ complete blocks, apply the same replacement and also replace the incomplete final stretch, which uses a proper subalphabet. There are at most $t+1$ replaced stretches. Accuracy $\eta/[6(t+1)]$ for each makes their total contribution at most $\eta/2$. Crucially the long suffix is replaced first, before approximating $p$.
+
+There are finitely many resulting templates and choices of representatives, all effectively enumerable; they form an $\eta$-net of actual-word instruments in each monoid fiber. For a regular restriction use the recognizer's transition monoid, retaining its final state and end effect. Changing $J_w$ by $\eta$ changes its final acceptance by at most $3\eta$. Thus the maximum $L_\eta$ over the permitted net words satisfies $L_\eta\le V\le L_\eta+3\eta$, which computes $V$. Empty permitted languages are decidable and may be assigned value zero.
+
+Finally enumerate the finitely many ordered partitions of $d$ and quantify over a unitary change of basis. Vanishing lower blocks and, on each diagonal block $B$, the disjunction $B^*B=I$ or $I-B^*B$ positive definite are first-order real algebraic conditions. Quantifier elimination decides existence and supplies algebraic data for a decomposition. Scalar blocks show that simultaneous unitary triangularization, and in particular commuting continuing operators, are included.
+\end{proof}
+
+\paragraph{Scope of the ladder.}
+\Cref{prop:mo,prop:cptp,cor:qfacl} give algebraic measure-once values at one end and all left-c.e.\ values for QFA-CL and rational channels at the other. A KW measure-many automaton is itself a QFA-CL, with the same unitaries, the observable with outcomes accept~$a$, reject~$r$ and continue~$c$, and the control language $c^*a\{a,r,c\}^*$; a measure-once automaton is a KW automaton that halts only at the endmarker. The unresolved model in between is one-way KW measure-many. A two-way KW machine has a coherent head position ranging over the input cells: this is an unbounded quantum resource, so results for that model do not settle \cref{qu:kw}. A proposed two-way extension, using the circular-tape convention and rational realizing machines with linear halting time and at most one head reversal on each path, is reserved for version~1.2 (\emph{proof in preparation}); no two-way range theorem is asserted in this version. The one-way isolated-cutpoint decision problems in \cite[Section~2.2]{DJK05} are not addressed.
+
+
 \section{Open problems}\label{sec:open}
 
 \paragraph{Small automata.} The automata of Theorem~B have a fixed but large number of states. Few states are not enough.
@@ -598,7 +760,7 @@ Elkouss and P\'erez-Garc\'ia map each probabilistic finite automaton $A$ that st
 
 The corollary is an inclusion; we do not determine which reals are capacities of finite-state channels with rational transition probabilities.
 
-For measure-once quantum finite automata with rational or real algebraic amplitudes, Blondel, Jeandel, Koiran and Portier proved that it is decidable whether some word is accepted with probability strictly greater than a given rational threshold \cite{BJKP05}. For the automata to which their theorem applies, the lower cut of the value is decidable, so the value is a computable real. The phenomenon of Theorem~A does not occur there.
+Measure-once automata, quantum channels, quantum automata with control language and one-way Kondacs--Watrous measure-many automata are compared in \cref{sec:quantum}.
 
 \section*{How this work was done}
 \addcontentsline{toc}{section}{How this work was done}
@@ -606,12 +768,13 @@ For measure-once quantum finite automata with rational or real algebraic amplitu
 \paragraph{AI note.}
 The authors chose the question, directed the work and judged every result. AI models from two developers assisted. The question, whether a single rational probabilistic finite automaton can have a noncomputable value and whether the values are exactly the left-c.e.\ reals, was posed to OpenAI's GPT-6.1~Sol, with the theorem of Hochman and Meyerovitch as the model to aim at. In a long working session, several agents of that model family proposed routes, attacked them and audited one another. GPT-6.1~Sol derived the construction and the proofs of Theorems~A, B and~C, Corollary~D, \cref{prop:uniform}(i),(ii) and \cref{prop:two,prop:positive}, posed the question of three states, and recorded the routes that failed, among them that uniform undecidability does not by itself produce one noncomputable value, and that summing rewards over witnessed computations cannot prevent a profitable certificate from being repeated. Before a result was kept, an agent that had not written it re-derived it refutation-first; the range theorem was re-derived independently by three agents, and the bound on the number of states by two. The literature lookups of the session were read-only.
 
-Anthropic's Claude Opus~5.5 then checked the result refutation-first, as a review from the other developer. It re-derived each step from the notes of the session, before reading the session's own literature notes, and found no gap. It identified the compilation of an output machine into counter programs, and the universal program used for the bound on the number of states, as the steps written at the level of a sketch, and it noted that the rule for accepting and rejecting appeared in slightly different, equivalent forms across the notes. It judged the bookkeeping of the split test the most delicate step specific to the construction, and implemented the checking automaton and the payout for one small counter program as an explicit finite stochastic transition function in exact rational arithmetic; this test is described under Verification status. A separate run of Claude Opus~5.5 searched the literature for prior results, and another run wrote this manuscript. In writing, \cref{sec:counter} and the index check of \cref{sec:binary} were written out in full and one form of the payout was fixed. The following were added in writing: \cref{rem:random,rem:halting}; the reading of Theorem~C as undecidability of strict emptiness for $A_*$; the bound on the number of states in \cref{prop:uniform}(iii) and the remark after \cref{prop:uniform}; \cref{prop:pomdp}; and, in \cref{sec:open}, the questions on fixed matrices and probabilistic B\"uchi automata, a question on channels that the later review answered (below), and the remark on quantum automata. A separate agent of Claude Opus~5.5 that had not written the text read it as a hostile referee, checking every statement against its proof and every attribution against the literature notes. It found one error in a stated lemma: the parser of \cref{lem:parser}, as first written, accepted certificates with repeated final rows. The error did not affect any bound, since such rows only lower the probability that the joint test survives, and it is corrected in this version, together with the attributions and wordings that the reading flagged.
+Anthropic's Claude Opus~5.5 then checked the result refutation-first, as a review from the other developer. It re-derived each step from the notes of the session, before reading the session's own literature notes, and found no gap. It identified the compilation of an output machine into counter programs, and the universal program used for the bound on the number of states, as the steps written at the level of a sketch, and it noted that the rule for accepting and rejecting appeared in slightly different, equivalent forms across the notes. It judged the bookkeeping of the split test the most delicate step specific to the construction, and implemented the checking automaton and the payout for one small counter program as an explicit finite stochastic transition function in exact rational arithmetic; this test is described under Verification status. A separate run of Claude Opus~5.5 searched the literature for prior results, and another run wrote this manuscript. In writing, \cref{sec:counter} and the index check of \cref{sec:binary} were written out in full and one form of the payout was fixed. The following were added in writing: \cref{rem:random,rem:halting}; the reading of Theorem~C as undecidability of strict emptiness for $A_*$; the bound on the number of states in \cref{prop:uniform}(iii) and the remark after \cref{prop:uniform}; \cref{prop:pomdp}; and, in \cref{sec:open}, the questions on fixed matrices and probabilistic B\"uchi automata, a question on channels that the later review answered (below), and the remark on quantum automata (replaced in version~1.1.0 by \cref{sec:quantum}). A separate agent of Claude Opus~5.5 that had not written the text read it as a hostile referee, checking every statement against its proof and every attribution against the literature notes. It found one error in a stated lemma: the parser of \cref{lem:parser}, as first written, accepted certificates with repeated final rows. The error did not affect any bound, since such rows only lower the probability that the joint test survives, and it is corrected in this version, together with the attributions and wordings that the reading flagged.
 
 A fresh session of GPT-6.1~Sol then reviewed the written manuscript refutation-first, without the notes of the original session. It re-derived Theorems~A--D from the text and found no error in them. It observed that the question on channels in the first draft is answered by Theorem~C together with \cite[Theorem~1]{EPG18}; that observation is now \cref{cor:channel}, which Claude Opus~5.5 checked against the primary source. It also flagged the attribution to Boche, Schaefer and Poor, the scope of the remark on quantum automata, the abstract's description of the initial distribution and several wordings, all corrected here.
 
 Models are not listed as authors; the authors take responsibility for every claim. The proofs are given in full, and none of them uses a computation.
 
+The quantum section of version~1.1.0 was derived by GPT-6.1~Sol in a separate research run. Claude Opus~5.5 checked its claims refutation-first, including an independently written exact rational toy two-way automaton. GPT-6.1~Sol then wrote \cref{sec:quantum}, expanding the proofs of the included one-way subclasses and of the rational control-language realization, and wrote a new exact checker for the latter; Claude Opus~5.5 read the written section back refutation-first, re-deriving each statement and rerunning the checker. The two-way compiler was specified in prose in the research run; the toy engine did not instantiate that compiler. The two-way extension, and an isolated-cutpoint example built from it, are consequently deferred, with proof in preparation, rather than stated as theorems here.
 \section*{Verification status}
 \addcontentsline{toc}{section}{Verification status}
 
@@ -619,14 +782,23 @@ Theorems~A, B and~C, Corollary~D and \cref{prop:uniform}(i),(ii) were checked an
 
 The finite-state implementation was tested in exact rational arithmetic during the review, before this text was written. The tested automaton has the payout (P3) and the index check (I1)--(I4) in the form written here; its certificates also list the control state of each row, which the format of \cref{def:certificate} omits. One test program had two counters, and its halting runs output exactly the binary words with an even number of ones; with the index check of \cref{sec:binary} at $e=1$, those with an odd number. The checking automaton, both tests with their slots, the register, the payout and the restart were built as an explicit transition function for five choices of $(B,a,b)$ and of the index check, namely $(4,1/8,1/2)$ and $(16,1/8,1/2)$ without it, $(4,1/8,1/2)$ with $e=0$ and with $e=1$, and $(3,1/5,3/5)$ with $e=2$; these parameters need not satisfy \eqref{eq:B}, which the test does not use. Every transition row that was used was nonnegative with sum exactly $1$. For each choice, on all valid certificates with at most four output bits ($15$ or $16$ per choice), the surviving probabilities of the two tests were equal and agreed with the products of \cref{lem:masses}, and the probabilities entering $\yes$ and $\no$ agreed with \cref{lem:one}. On $83$ to $95$ certificates per choice that were well formed but not valid, including certificates with a wrong initial index, $\Psi\ge\kappa_B\Phi$ held. On $150$ further words per choice, mixing up to four certificates with truncations and inserted or appended letters, the acceptance probability equalled the sum in the proof of \cref{lem:allwords} and was at most the largest ratio $\acc(t)/(\acc(t)+\rej(t))$ of its certificates, and the formula of \cref{lem:repeat} held for $m=1,2,5$. There were no failures. About $1{,}400$ states outside $\{\yes,\no\}$ were reachable for each choice. The test checks the finite-state bookkeeping on one program; it does not test the compilation of \cref{sec:counter} or the universal program, and no proof uses it. Reports of the checks are available from the authors.
 
+For \cref{sec:quantum}, the cross-family review used \emph{PROVED} for claims it re-derived analytically and \emph{COMPUTED} for its independent exact finite checks. Its priority assessment for the control-language range statement was \emph{PARTLY KNOWN}: exact PFA simulation is folklore, and the value statement follows from Theorem~A; the rational-unitary refinement was not found in print. The history-checking technique behind the deferred two-way extension, and the undecidability of isolated-cutpoint emptiness for 1.5-way automata, are known, due to Amano and Iwama; see Blondel, Jeandel, Koiran and Portier \cite[p.~1464]{BJKP05}. The missing instantiated counter compiler is the reason that extension is deferred. Propositions~\ref{prop:mo} and~\ref{prop:cptp} were added in writing at the review's recommendation and are immediate, respectively, from \cite{DJK05} and from the folklore simulation \cite[Theorem~4.2]{AY15} with Theorem~A; we claim no priority for them. The review re-derived Propositions~\ref{prop:kw-rankone} and~\ref{prop:kw-block} and Lemma~\ref{lem:regular-unitary} (\emph{PROVED}); no priority search was made for them. These labels describe that review's findings, not an exhaustive priority claim.
+
+The new accompanying \texttt{quantum\_checks.py} checks the rational control-language construction directly from its unitary matrices, using exact fractions and an outcome/controller dynamic program independent of the expected PFA formulas, and the classical channel embedding of \cref{prop:cptp} on 63 words. It verified $4{,}812$ column inner products and $1{,}929$ acceptance comparisons with no failures, and detected a planted nonunitary coin and a planted incorrect sampler. Its detailed counts and positive controls are in \texttt{quantum\_checks.txt}. It checks finite instances of the included constructions; it does not instantiate or certify a two-way counter-machine compiler, and none of the proofs depends on it. Its test automata already have deterministic starts, so the opening-letter step is not exercised.
 \section*{Credit}
 \addcontentsline{toc}{section}{Credit}
 
-Probabilistic finite automata are due to Rabin \cite{Rab63}. The verification of counter-machine runs by unary coin-flipping tests is due to Condon and Lipton \cite{CL89}, building on an equality test of Freivalds \cite{Fre81}; we follow the accounts of Madani, Hanks and Condon \cite{MHC99,MHC03} and Rote \cite{Rot24}. The undecidability of emptiness is due to Nasu and Honda \cite{NH69}; it is often credited to Paz's book \cite{Paz71}, and \cite{Rot24} gives its history. The simulation of Turing machines by counter machines is Minsky's \cite{Min61,Min67}. Reals defined from a computably enumerable undecidable set, as $\alpha_*$ is, go back to Specker \cite{Spe49}. The model of a range theorem is that of Hochman and Meyerovitch \cite{HM10}.
+Probabilistic finite automata are due to Rabin \cite{Rab63}. The verification of counter-machine runs by unary coin-flipping tests is due to Condon and Lipton \cite{CL89}, building on an equality test of Freivalds \cite{Fre81}; we follow the accounts of Madani, Hanks and Condon \cite{MHC99,MHC03} and Rote \cite{Rot24}. The undecidability of emptiness is due to Nasu and Honda \cite{NH69}; it is often credited to Paz's book \cite{Paz71}, and \cite{Rot24} gives its history. The simulation of Turing machines by counter machines is Minsky's \cite{Min61,Min67}. Reals defined from a computably enumerable undecidable set, as $\alpha_*$ is, go back to Specker \cite{Spe49}. The model of a range theorem is that of Hochman and Meyerovitch \cite{HM10}. Quantum automata with control language are due to Bertoni, Mereghetti and Palano \cite{BMP03,MP06}, and measure-many automata to Kondacs and Watrous \cite{KW97}; the compact-closure method for measure-once automata is that of Derksen, Jeandel and Koiran \cite{DJK05}; exact simulation of probabilistic by quantum automata is folklore \cite[Theorem~4.2]{AY15}.
 
 \begin{thebibliography}{99}\raggedright
+\bibitem{AY15}
+A. Ambainis and A. Yakary\i lmaz, \emph{Automata and quantum computing}, arXiv:1507.01988 (2015; version~2, 2018), \url{https://arxiv.org/abs/1507.01988}.
+
 \bibitem{BBG08}
 C. Baier, N. Bertrand and M. Gr\"o{\ss}er, \emph{On decision problems for probabilistic B\"uchi automata}, in \emph{Foundations of Software Science and Computational Structures (FoSSaCS 2008)}, Lecture Notes in Computer Science \textbf{4962}, Springer, 2008, 287--301.
+
+\bibitem{BMP03}
+A. Bertoni, C. Mereghetti and B. Palano, \emph{Quantum computing: 1-way quantum automata}, in \emph{Developments in Language Theory (DLT 2003)}, Lecture Notes in Computer Science \textbf{2710}, Springer, 2003, 1--20.
 
 \bibitem{BJKP05}
 V. D. Blondel, E. Jeandel, P. Koiran and N. Portier, \emph{Decidable and undecidable problems about quantum automata}, SIAM Journal on Computing \textbf{34} (2005), 1464--1473.
@@ -643,6 +815,9 @@ G. J. Chaitin, \emph{A theory of program size formally identical to information 
 
 \bibitem{CL89}
 A. Condon and R. J. Lipton, \emph{On the complexity of space bounded interactive proofs (extended abstract)}, in \emph{30th Annual Symposium on Foundations of Computer Science}, IEEE, 1989, 462--467.
+
+\bibitem{DJK05}
+H. Derksen, E. Jeandel and P. Koiran, \emph{Quantum automata and algebraic groups}, Journal of Symbolic Computation \textbf{39} (2005), 357--371, \href{https://doi.org/10.1016/j.jsc.2004.11.008}{doi:10.1016/j.jsc.2004.11.008}.
 
 \bibitem{DH10}
 R. G. Downey and D. R. Hirschfeldt, \emph{Algorithmic Randomness and Complexity}, Springer, New York, 2010.
@@ -666,6 +841,9 @@ H. Gimbert and Y. Oualhadj, \emph{Probabilistic automata on finite words: decida
 \bibitem{HM10}
 M. Hochman and T. Meyerovitch, \emph{A characterization of the entropies of multidimensional shifts of finite type}, Annals of Mathematics \textbf{171} (2010), 2011--2038.
 
+\bibitem{KW97}
+A. Kondacs and J. Watrous, \emph{On the power of quantum finite state automata}, in \emph{Proceedings of the 38th Annual Symposium on Foundations of Computer Science (FOCS 1997)}, IEEE, 1997, 66--75.
+
 \bibitem{KS01}
 A. Ku\v{c}era and T. A. Slaman, \emph{Randomness and recursive enumerability}, SIAM Journal on Computing \textbf{31} (2001), 199--211.
 
@@ -674,6 +852,9 @@ O. Madani, S. Hanks and A. Condon, \emph{On the undecidability of probabilistic 
 
 \bibitem{MHC03}
 O. Madani, S. Hanks and A. Condon, \emph{On the undecidability of probabilistic planning and related stochastic optimization problems}, Artificial Intelligence \textbf{147} (2003), 5--34.
+
+\bibitem{MP06}
+C. Mereghetti and B. Palano, \emph{Quantum finite automata with control language}, RAIRO--Theoretical Informatics and Applications \textbf{40} (2006), 315--332, \href{https://doi.org/10.1051/ita:2006007}{doi:10.1051/ita:2006007}.
 
 \bibitem{Min61}
 M. L. Minsky, \emph{Recursive unsolvability of Post's problem of ``Tag'' and other topics in theory of Turing machines}, Annals of Mathematics \textbf{74} (1961), 437--455.

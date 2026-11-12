@@ -2,8 +2,8 @@
   "title": "The values of rational probabilistic finite automata are the left-c.e. reals",
   "upload_type": "publication",
   "publication_type": "preprint",
-  "version": "1.0.2",
-  "publication_date": "2026-11-11",
+  "version": "1.1.0",
+  "publication_date": "2026-11-12",
   "creators": [
     {
       "name": "Douglas, Seth",
@@ -14,7 +14,7 @@
       "orcid": "0009-0005-6534-1118"
     }
   ],
-  "description": "Which real numbers are values of probabilistic finite automata with rational transition probabilities and a rational initial distribution? We show that they are exactly the left-c.e. reals in [0,1], the limits of computable nondecreasing sequences of rational numbers. Here the value of an automaton is the supremum, over all finite input words, of the probability that the word is accepted. Every value is left-c.e. because the words can be enumerated; we prove that every left-c.e. real in [0,1] occurs, and that two input letters and one fixed number of states suffice for all of them.<br><br>In particular a single automaton can have a noncomputable value. It was known that no algorithm computes, or even approximates, the value from the automaton; that concerns the map from automata to values, not single values. We give an automaton, specified explicitly relative to a fixed enumeration of Turing machines, whose value is 1/4 plus the sum of 4^-(n+2) over the programs n that halt on input n. The automaton checks claimed runs of a counter machine by a likelihood test in the manner of Condon and Lipton, and pays out a reward read from each run's output. The construction uses a rational interval around the target; from the target's approximations alone no algorithm can produce the automaton, since an automaton of value 0 can be recognized. The halting probability of every prefix-free machine, Chaitin's Ω among them, is the value of a probabilistic finite automaton with two input letters. With a construction of Elkouss and Pérez-García, every left-c.e. real in [0,1] is also the capacity of a finite-state channel with rational transition probabilities; in particular one such channel has a noncomputable capacity.",
+  "description": "Which real numbers are values of probabilistic finite automata with rational transition probabilities and rational initial distributions? We prove that they are exactly the left-c.e. reals in [0,1], the limits of computable nondecreasing rational sequences, and that two input letters and one fixed number of states suffice. The value is the supremum of acceptance probabilities over finite words. It was known that the value cannot be computed or approximated from the automaton; here a single automaton has a noncomputable value, given explicitly relative to a fixed enumeration of Turing machines. The construction checks counter-machine histories by a likelihood test in the manner of Condon and Lipton and pays a reward read from the output. It is effective given a rational interval around the target, but cannot be made effective from its approximations alone. Every prefix-free halting probability, including Chaitin's Ω, is a value. A construction of Elkouss and Pérez-García also realizes every left-c.e. real in [0,1] as a rational finite-state channel capacity. For quantum automata with algebraic data, measure-once values are algebraic, while rational quantum channels and QFAs with control language realize all left-c.e. reals in [0,1]; computability for one-way Kondacs–Watrous measure-many automata remains open.",
   "keywords": [
     "probabilistic finite automata",
     "value of an automaton",
@@ -22,12 +22,13 @@
     "computability",
     "noncomputable reals",
     "counter machines",
-    "halting probability"
+    "halting probability",
+    "quantum finite automata"
   ],
   "access_right": "open",
   "license": "cc-by-4.0",
   "language": "eng",
-  "notes": "Preprint. It has not been peer reviewed. Version 1.0.2. Version 1.0.2 corrects the version string on the title page of the PDF, which read \"Version 1.0.0\" in version 1.0.1. Version 1.0.1 corrected the names of cross-references in the PDF, a garbled name in paper/abstract.txt, and the page count in paper/README.txt. The mathematics is unchanged. Text: CC BY 4.0. Build script: MIT or Apache 2.0.",
+  "notes": "Preprint. It has not been peer reviewed. Version 1.1.0. Version 1.1.0 adds Section 9, \"Quantum automata: where the ladder breaks\": measure-once quantum automata with algebraic data have algebraic values (implicit in Derksen, Jeandel and Koiran); automata whose letters act by rational quantum channels, and quantum automata with control language, have exactly the left-c.e. reals in [0,1] as values; computability of the values of one-way Kondacs-Watrous measure-many automata is posed as an open question, and two subclasses of that model are proved to have computable values. A two-way extension is deferred to version 1.2 (proof in preparation). The former Section 9 is now Section 10 (Corollary 9.7 is now Corollary 10.7). The abstract is shortened, five references are added, and an exact checker for the control-language and channel constructions, paper/quantum_checks.py, ships with its recorded output; no proof depends on it. Theorems A-D and their proofs are unchanged. Version 1.0.2 corrected the version string on the title page of the PDF. Version 1.0.1 corrected the names of cross-references in the PDF, a garbled name in paper/abstract.txt, and the page count in paper/README.txt. Text: CC BY 4.0. Build script and checker: MIT or Apache 2.0.",
   "related_identifiers": [
     {
       "identifier": "https://finite.works/papers/pfa-values/",
